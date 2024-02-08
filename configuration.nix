@@ -67,7 +67,7 @@
   users.mutableUsers = false;
   users.users.kaigyo = {
     uid = 1000;
-    hashedPasswordFile = "/persist/password";
+    initialHashedPassword = builtins.readFile "/persist/password";
     isNormalUser = true;
     extraGroups = [ 
       "wheel" # Enable ‘sudo’
@@ -81,6 +81,7 @@
       dolphin
       ffmpeg-full
       firefox
+      git
       kitty
       micro
       neofetch
@@ -146,8 +147,6 @@
     ln -sf /persist/etc/machine-id /etc/machine-id
   ''; # machine id is needed very early
   environment.etc = {
-    "nixos/configuration.nix".source = "/persist/etc/nixos/configuration.nix";
-    "nixos/hardware-configuration.nix".source = "/persist/etc/nixos/hardware-configuration.nix";
     "ssh/ssh_host_ed25519_key".source = "/persist/etc/ssh/ssh_host_ed25519_key";
     "ssh/ssh_host_rsa_key".source = "/persist/etc/ssh/ssh_host_rsa_key";
   };
