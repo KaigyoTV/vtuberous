@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 ###############################################################################
 # █░█ ▄▀█ █▀█ █ ▄▀█ █▄▄ █░░ █▀▀ █▀
@@ -32,7 +33,7 @@ parted "/dev/disk/by-id/${DISK_ID}" -- set 3 esp on
 
 sudo mkswap -L swap "/dev/disk/by-id/${DISK_ID}-part2"
 mkfs.fat -F 32 -n boot "/dev/disk/by-id/${DISK_ID}-part3"
-zpool create rpool "/dev/disk/by-id/${DISK_ID}-part1"
+zpool create -f rpool "/dev/disk/by-id/${DISK_ID}-part1"
 
 
 
