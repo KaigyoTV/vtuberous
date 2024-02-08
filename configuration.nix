@@ -65,9 +65,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = pkgs.zsh;
   users.mutableUsers = false;
+  fileSystems."/persist".neededForBoot = true;
   users.users.kaigyo = {
     uid = 1000;
-    initialHashedPassword = builtins.readFile "/persist/password";
+    hashedPasswordFile = "/persist/password";
     isNormalUser = true;
     extraGroups = [ 
       "wheel" # Enable ‘sudo’
